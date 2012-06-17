@@ -44,8 +44,13 @@ class GetHttpResponse implements Runnable
 
 						if (this.cancelled.get() == false)
 						{
-							this.handler.sendMessage(this.handler.obtainMessage(
-									WebConnection.MSG_CONNECTION_SUCCESS, result));
+							int httpCode = response.getStatusLine().getStatusCode();
+
+							if (this.cancelled.get() == false)
+							{
+								this.handler.sendMessage(this.handler.obtainMessage(
+										WebConnection.MSG_CONNECTION_SUCCESS, httpCode, 0, result));
+							}
 						}
 					}
 				}
