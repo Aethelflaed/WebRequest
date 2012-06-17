@@ -9,7 +9,7 @@ public abstract class WebConnection implements Handler.Callback
 {
 	public interface Requester
 	{
-		public void requestFinished(WebConnection request, String response);
+		public void requestFinished(WebConnection request, String response, int httpCode);
 
 		public void requestFailed(WebConnection request);
 	}
@@ -55,7 +55,7 @@ public abstract class WebConnection implements Handler.Callback
 				if (this.handler != null)
 				{
 					WebConnection.this.handler.requestFinished(
-							WebConnection.this, (String) msg.obj);
+							WebConnection.this, (String) msg.obj, msg.arg1);
 				}
 				return true;
 		}
