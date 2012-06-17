@@ -1,4 +1,4 @@
-package com.aethelflaed.webconnection
+package com.aethelflaed.webconnection;
 
 import java.io.BufferedReader;
 import java.io.IOException;
