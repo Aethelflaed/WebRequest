@@ -5,8 +5,18 @@ import org.apache.http.client.methods.HttpUriRequest;
 import android.os.Handler;
 import android.os.Message;
 
+/**
+ * Basic web request
+ * 
+ * @author Aethelflaed
+ */
 public abstract class WebRequest implements Handler.Callback
 {
+	/**
+	 * Interface implemented by object which wants to listen to the request
+	 *  
+	 * @author Aethelflaed
+	 */
 	public interface Requester
 	{
 		public void requestFinished(WebRequest request, String response, int httpCode);
@@ -27,6 +37,13 @@ public abstract class WebRequest implements Handler.Callback
 
 	private GetHttpResponse response;
 
+	/**
+	 * Construct a new WebRequest object
+	 * 
+	 * @param url The query URL, as a string
+	 * @param handler The requester (listener) or the query
+	 * @param contentType The contentType of the query
+	 */
 	public WebRequest(String url, Requester handler, String contentType)
 	{
 		super();
@@ -39,6 +56,9 @@ public abstract class WebRequest implements Handler.Callback
 		this.messageHandler = new Handler(this);
 	}
 
+	/**
+	 * Handle messages received from the underlying thread.
+	 */
 	@Override
 	public boolean handleMessage(Message msg)
 	{
@@ -62,6 +82,11 @@ public abstract class WebRequest implements Handler.Callback
 		return false;
 	}
 
+	/**
+	 * Start the request with a HttpUriRequest
+	 * 
+	 * @param request
+	 */
 	protected void start(HttpUriRequest request)
 	{
 		this.response = new GetHttpResponse(request, this.messageHandler);
@@ -75,6 +100,9 @@ public abstract class WebRequest implements Handler.Callback
 		}
 	}
 
+	/**
+	 * Stop the request
+	 */
 	public void stop()
 	{
 		if (this.response != null)
@@ -85,51 +113,99 @@ public abstract class WebRequest implements Handler.Callback
 		}
 	}
 
+	/**
+	 * @return The request's url
+	 */
 	public String getUrl()
 	{
 		return url;
 	}
 
+	/**
+	 * Set the request's url.
+	 * Has no effect once the request is started.
+	 * 
+	 * @param url
+	 */
 	public void setUrl(String url)
 	{
 		this.url = url;
 	}
 
+	/**
+	 * @return The request's handler
+	 */
 	public Requester getHandler()
 	{
 		return handler;
 	}
 
+	/**
+	 * Set the request's handler.
+	 * May have no effect once started.
+	 * 
+	 * @param handler
+	 */
 	public void setHandler(Requester handler)
 	{
 		this.handler = handler;
 	}
 
+	/**
+	 * @return The MIME content-type
+	 */
 	public String getContentType()
 	{
 		return contentType;
 	}
 
+	/**
+	 * Set the MIME content-type.
+	 * Has no effect once the request is started
+	 * 
+	 * @param contentType
+	 */
 	public void setContentType(String contentType)
 	{
 		this.contentType = contentType;
 	}
 
+	/**
+	 * Check if the request is asynchronous or not.
+	 * 
+	 * @return
+	 */
 	public boolean isAsync()
 	{
 		return this.async;
 	}
 
+	/**
+	 * Set the request as asynchronous or not.
+	 * Has no effect once the request is started
+	 * 
+	 * @param async
+	 */
 	public void setAsync(boolean async)
 	{
 		this.async = async;
 	}
 
+	/**
+	 * @return The identifier tag
+	 */
 	public int getTag()
 	{
 		return tag;
 	}
 
+	/**
+	 * Set the identifier tag.
+	 * May be used in case of multiple connections, to differenciate
+	 * one request from another.
+	 * 
+	 * @param tag
+	 */
 	public void setTag(int tag)
 	{
 		this.tag = tag;
