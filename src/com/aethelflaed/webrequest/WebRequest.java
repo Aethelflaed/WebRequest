@@ -9,9 +9,9 @@ public abstract class WebRequest implements Handler.Callback
 {
 	public interface Requester
 	{
-		public void requestFinished(WebConnection request, String response, int httpCode);
+		public void requestFinished(WebRequest request, String response, int httpCode);
 
-		public void requestFailed(WebConnection request);
+		public void requestFailed(WebRequest request);
 	}
 
 	public static final int MSG_CONNECTION_FAIL = 0;
@@ -27,7 +27,7 @@ public abstract class WebRequest implements Handler.Callback
 
 	private GetHttpResponse response;
 
-	public WebConnection(String url, Requester handler, String contentType)
+	public WebRequest(String url, Requester handler, String contentType)
 	{
 		super();
 
@@ -47,15 +47,15 @@ public abstract class WebRequest implements Handler.Callback
 			case MSG_CONNECTION_FAIL:
 				if (this.handler != null)
 				{
-					WebConnection.this.handler
-							.requestFailed(WebConnection.this);
+					WebRequest.this.handler
+							.requestFailed(WebRequest.this);
 				}
 				return true;
 			case MSG_CONNECTION_SUCCESS:
 				if (this.handler != null)
 				{
-					WebConnection.this.handler.requestFinished(
-							WebConnection.this, (String) msg.obj, msg.arg1);
+					WebRequest.this.handler.requestFinished(
+							WebRequest.this, (String) msg.obj, msg.arg1);
 				}
 				return true;
 		}

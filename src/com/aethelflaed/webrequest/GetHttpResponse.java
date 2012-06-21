@@ -49,7 +49,7 @@ class GetHttpResponse implements Runnable
 							if (this.cancelled.get() == false)
 							{
 								this.handler.sendMessage(this.handler.obtainMessage(
-										WebConnection.MSG_CONNECTION_SUCCESS, httpCode, 0, result));
+										WebRequest.MSG_CONNECTION_SUCCESS, httpCode, 0, result));
 							}
 						}
 					}
@@ -62,7 +62,7 @@ class GetHttpResponse implements Runnable
 		}
 		catch (Exception e)
 		{
-			this.handler.sendEmptyMessage(WebConnection.MSG_CONNECTION_FAIL);
+			this.handler.sendEmptyMessage(WebRequest.MSG_CONNECTION_FAIL);
 		}
 	}
 
@@ -86,7 +86,7 @@ class GetHttpResponse implements Runnable
 		catch (IOException e)
 		{
 			Message msg = new Message();
-			msg.what = WebConnection.MSG_CONNECTION_FAIL;
+			msg.what = WebRequest.MSG_CONNECTION_FAIL;
 			this.handler.sendMessage(msg);
 		}
 		finally
@@ -98,7 +98,7 @@ class GetHttpResponse implements Runnable
 			catch (IOException e)
 			{
 				Message msg = new Message();
-				msg.what = WebConnection.MSG_CONNECTION_FAIL;
+				msg.what = WebRequest.MSG_CONNECTION_FAIL;
 				this.handler.sendMessage(msg);
 			}
 		}

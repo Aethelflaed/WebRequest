@@ -5,9 +5,9 @@ import java.io.UnsupportedEncodingException;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 
-public class WebPoster extends WebConnection
+public class WebPoster extends WebRequest
 {
-	public static final String TAG = WebConnection.class.getSimpleName();
+	public static final String TAG = WebRequest.class.getSimpleName();
 
 	private String data;
 

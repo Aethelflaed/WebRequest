@@ -2,7 +2,7 @@ package com.aethelflaed.webrequest;
 
 import org.apache.http.client.methods.HttpGet;
 
-public class WebGetter extends WebConnection
+public class WebGetter extends WebRequest
 {
 	public WebGetter(String url, Requester handler)
 	{
