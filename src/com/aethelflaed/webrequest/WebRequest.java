@@ -5,7 +5,7 @@ import org.apache.http.client.methods.HttpUriRequest;
 import android.os.Handler;
 import android.os.Message;
 
-public abstract class WebConnection implements Handler.Callback
+public abstract class WebRequest implements Handler.Callback
 {
 	public interface Requester
 	{
