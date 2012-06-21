@@ -1,4 +1,4 @@
-package com.aethelflaed.webconnection;
+package com.aethelflaed.webrequest;
 
 import org.apache.http.client.methods.HttpGet;
 
