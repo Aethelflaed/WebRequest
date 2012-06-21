@@ -1,5 +1,5 @@
-WebConnection
-=============
+WebRequest
+==========
 
 A very simple android / java utility to handle web requests.
 
