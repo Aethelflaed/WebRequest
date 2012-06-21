@@ -4,3 +4,5 @@ gen/
 local.properties
 *.jar
 *.apk
+.project
+.classpath
